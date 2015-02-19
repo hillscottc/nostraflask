@@ -1,6 +1,40 @@
 {% extends "layout.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block extra_css %}
+    <style>
+        #sample-horo { background: #ccc; border: 1px solid #000; padding: 10px; }
+    </style>
+{% endblock extra_css %}
+
+
 {% block content %}
 
-home home home
+    <div style="text-align:center">
+        <button id="horo-btn">consult nostradamus</button>
+    </div>
+    <br/><br/>
+    <div id="sample-horo"></div>
 
 {% endblock %}
+
+
+{% block extrajs %}
+    <script type="text/javascript">
+
+        $("#horo-btn").click(function(){
+            console.log("horo");
+            var nostra_el = $("#sample-horo");
+            nostra_el.hide("scale");
+            nostra_el.load("{{ url_for('gen') }}", function(responseTxt, statusTxt, xhr){
+                if(statusTxt == "error") console.log("Err: " + xhr.status + ": " + xhr.statusText);
+            });
+            nostra_el.show("scale");
+        });
+
+    </script>
+{% endblock extrajs %}
+
+
+

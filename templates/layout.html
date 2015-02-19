@@ -25,7 +25,13 @@
 </head>
 
 <body role="document">
-    {% block nav_global %}{% endblock %}
+
+
+    {% block nav_global %}
+        {% include "navbar.html" %}
+    {% endblock %}
+
+
     <div id="content" class="container theme-showcase" role="main">
         {% block messages %}{% endblock messages %}
         {% block content %}{% endblock %}
