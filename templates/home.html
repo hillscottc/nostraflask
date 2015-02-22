@@ -20,11 +20,10 @@
 {% endblock %}
 
 
-{% block extrajs %}
+{% block extra_js %}
     <script type="text/javascript">
 
         $("#horo-btn").click(function(){
-            console.log("horo");
             var nostra_el = $("#sample-horo");
             nostra_el.hide("scale");
             nostra_el.load("{{ url_for('gen') }}", function(responseTxt, statusTxt, xhr){
@@ -34,7 +33,7 @@
         });
 
     </script>
-{% endblock extrajs %}
+{% endblock extra_js %}
 
 
 
