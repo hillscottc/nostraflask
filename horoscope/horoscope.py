@@ -15,7 +15,9 @@ def generate(dirty=False):
     mood = "good" if random.random() <= 0.8 else "bad"
 
     discussion_s = choose_from([relationship_s, encounter_s])
-    sentences = [feeling_statement_s, cosmic_implication_s, warning_s, discussion_s]
+    # sentences = [feeling_statement_s, cosmic_implication_s, warning_s, discussion_s]
+    # No cosmic stuff.
+    sentences = [feeling_statement_s, warning_s, discussion_s]
 
     # Select 2 or 3 sentences
     k = random.randint(2, 3)
@@ -167,58 +169,6 @@ def warning_s(mood, dirty):
     return sentence_case(s)
 
 
-def cosmic_implication_s(mood, dirty):
-    """Generate a sentence about the influence of a cosmic event."""
-    c_event = cosmic_event(dirty)
-    prediction_verbs = wordlist("prediction_verbs", dirty)
-    verb = choose_from(prediction_verbs)
-
-    # Bad mood =  End of good, or start of bad
-    # Good mood = End of bad, or start of good
-    r = random.random()
-    beginnings = wordlist("beginnings", dirty)
-    endings = wordlist("endings", dirty)
-    if mood == 'bad' and r <= 0.5:
-        junction = choose_from(beginnings)
-        e_event = emotive_event('bad', dirty)
-    elif mood == 'bad':
-        junction = choose_from(endings)
-        e_event = emotive_event('good', dirty)
-    elif mood == 'good' and r <= 0.5:
-        junction = choose_from(beginnings)
-        e_event = emotive_event('good', dirty)
-    else:
-        junction = choose_from(endings)
-        e_event = emotive_event('bad', dirty)
-
-    s = "%s %s the %s of %s" % (c_event, verb, junction, e_event)
-    return sentence_case(s)
-
-
-def cosmic_event(dirty):
-    r = random.random()
-
-    planets = wordlist("planets", dirty)
-    stars = wordlist("stars", dirty)
-    wanky_events = wordlist("wanky_events", dirty)
-    aspects = wordlist("aspects", dirty)
-
-    if r <= 0.25:
-        return random.choice(planets) + " in retrograde"
-    elif r <= 0.5:
-        c_event = "the " + random.choice(["waxing", "waning"])
-        c_event += " of " + choose_from(planets, ["the moon"], stars)
-        return c_event
-    elif r <= 0.6:
-        return "the " + random.choice(["New", "Full"]) + " Moon"
-    elif r <= 0.75:
-        return random.choice(wanky_events)
-    else:
-        first = choose_from(planets, stars, ["Moon"])
-        second = choose_uniq({first}, planets, stars, ["Moon"])
-        return "The %s/%s %s" % (first, second, choose_from(aspects))
-
-
 def emotive_event(mood, dirty):
     """Generate a sentence about a prolonged emotion."""
     feeling_adjs = wordlist("_feeling_adjs", dirty, prefix=mood)
@@ -234,3 +184,56 @@ def emotive_event(mood, dirty):
     else:
         noun = choose_from(feeling_nouns, emotive_nouns)
         return "%s of %s" % (time_period, noun)
+
+
+# def cosmic_implication_s(mood, dirty):
+#     """Generate a sentence about the influence of a cosmic event."""
+#     c_event = cosmic_event(dirty)
+#     prediction_verbs = wordlist("prediction_verbs", dirty)
+#     verb = choose_from(prediction_verbs)
+#
+#     # Bad mood =  End of good, or start of bad
+#     # Good mood = End of bad, or start of good
+#     r = random.random()
+#     beginnings = wordlist("beginnings", dirty)
+#     endings = wordlist("endings", dirty)
+#     if mood == 'bad' and r <= 0.5:
+#         junction = choose_from(beginnings)
+#         e_event = emotive_event('bad', dirty)
+#     elif mood == 'bad':
+#         junction = choose_from(endings)
+#         e_event = emotive_event('good', dirty)
+#     elif mood == 'good' and r <= 0.5:
+#         junction = choose_from(beginnings)
+#         e_event = emotive_event('good', dirty)
+#     else:
+#         junction = choose_from(endings)
+#         e_event = emotive_event('bad', dirty)
+#
+#     s = "%s %s the %s of %s" % (c_event, verb, junction, e_event)
+#     return sentence_case(s)
+#
+#
+# def cosmic_event(dirty):
+#     r = random.random()
+#
+#     planets = wordlist("planets", dirty)
+#     stars = wordlist("stars", dirty)
+#     wanky_events = wordlist("wanky_events", dirty)
+#     aspects = wordlist("aspects", dirty)
+#
+#     if r <= 0.25:
+#         return random.choice(planets) + " in retrograde"
+#     elif r <= 0.5:
+#         c_event = "the " + random.choice(["waxing", "waning"])
+#         c_event += " of " + choose_from(planets, ["the moon"], stars)
+#         return c_event
+#     elif r <= 0.6:
+#         return "the " + random.choice(["New", "Full"]) + " Moon"
+#     elif r <= 0.75:
+#         return random.choice(wanky_events)
+#     else:
+#         first = choose_from(planets, stars, ["Moon"])
+#         second = choose_uniq({first}, planets, stars, ["Moon"])
+#         return "The %s/%s %s" % (first, second, choose_from(aspects))
+
