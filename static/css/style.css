@@ -1,0 +1,8 @@
+#sample-horo {
+    background: #ccc;
+    border: 1px solid #000;
+    padding: 20px;
+    font-family: 'Indie Flower', cursive;
+    /*font-family: 'Tangerine', serif;*/
+    font-size: 40px;
+}

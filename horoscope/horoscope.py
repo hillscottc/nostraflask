@@ -23,8 +23,10 @@ def generate(dirty=False):
     final_text = " ".join([sentence(mood, dirty) for sentence in sentences])
 
     # Optionally add a date prediction
-    if random.random() <= 0.5 and k == 2:
-        final_text += " " + date_prediction_s(mood, dirty)
+    # if random.random() <= 0.5 and k == 2:
+    #     final_text += " " + date_prediction_s(mood, dirty)
+    # Always add a date prediction
+    final_text += " " + date_prediction_s(mood, dirty)
 
     return final_text
 
