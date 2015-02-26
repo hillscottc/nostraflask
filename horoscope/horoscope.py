@@ -1,7 +1,4 @@
-"""Adapted from the Random Horoscope Generator at https://github.com/michaelsproul/bullshit
-
-"""
-
+"""Adapted from the Random Horoscope Generator at https://github.com/michaelsproul/bullshit"""
 import random
 from datetime import date, timedelta
 
