@@ -3,13 +3,6 @@ from horoscope import horoscope
 
 SECRET_KEY = 'development key'
 
-NOSE_ARGS = [
-    '--detailed-errors', '--verbosity=2',
-    '--nocapture', '--nologcapture',
-    #'--failed',  # Run tests that failed in the last run.
-    #'--stop',    # Stop at first failure.
-    # '--pdb',
-]
 
 app = Flask(__name__)
 app.config.from_object(__name__)
