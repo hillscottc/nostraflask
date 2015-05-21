@@ -14,22 +14,22 @@
     <br/><br/>
     <div id="sample-horo"></div>
 
+<ul id="outList"></ul>
+
 {% endblock %}
 
 
+
+
 {% block extra_js %}
+
     <script type="text/javascript">
-
-        $("#horo-btn").click(function(){
-            var nostra_el = $("#sample-horo");
-            nostra_el.hide("scale");
-            nostra_el.load("{{ url_for('gen') }}", function(responseTxt, statusTxt, xhr){
-                if(statusTxt == "error") console.log("Err: " + xhr.status + ": " + xhr.statusText);
-            });
-            nostra_el.show("scale");
-        });
-
+        var app = app || {};
+        app.nostra_url = '{{ url_for('gen') }}';
     </script>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
 {% endblock extra_js %}
 
 
