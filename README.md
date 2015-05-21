@@ -8,7 +8,7 @@ A Flask interface for Nostradamuss, hosted on [heroku](https://nostraflask.herok
 # Test
 I'm using [Nose](http://nose.readthedocs.org/en/latest/). 
 
-    nosetest
+    nosetests
     
 
     
