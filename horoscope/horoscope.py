@@ -1,17 +1,19 @@
 """Adapted from the Random Horoscope Generator at https://github.com/michaelsproul/bullshit"""
 import random
+import logging
 from datetime import date, timedelta
 
 from .common import choose_from, choose_uniq, sentence_case, ing_to_ed, an
 from .wordlist import wordlist
 
+log = logging.getLogger(__name__)
 
 def generate(dirty=False):
     """Generate a three to four sentence horoscope."""
     # Pick a mood (usually positive)
     mood = "good" if random.random() <= 0.8 else "bad"
 
-    discussion_s = choose_from([relationship_s, encounter_s])
+    discussion_s = choose_from([relationship, encounter])
     # sentences = [feeling_statement_s, cosmic_implication_s, warning_s, discussion_s]
     # No cosmic stuff.
     sentences = [feeling_statement_s, warning_s, discussion_s]
@@ -27,10 +29,12 @@ def generate(dirty=False):
     # Always add a date prediction
     final_text += " " + date_prediction_s(mood, dirty)
 
+    log.info(final_text)
+
     return final_text
 
 
-def relationship_s(mood, dirty):
+def relationship(mood, dirty=False):
     """Generate a sentence about a relationship."""
     if mood == "good":
         verb = "strengthened"
@@ -51,7 +55,7 @@ def relationship_s(mood, dirty):
     return sentence_case(s)
 
 
-def encounter_s(mood, dirty):
+def encounter(mood, dirty=False):
     """Generate a few sentences about a meeting with another person."""
     # Sentence 1: The meeting
     familiar_people = wordlist("familiar_people", dirty)
@@ -84,7 +88,7 @@ def encounter_s(mood, dirty):
     return "%s %s" % (s1, s2)
 
 
-def date_prediction_s(mood, dirty):
+def date_prediction_s(mood, dirty=False):
     """Generate a random prediction sentence containing a date."""
     days_in_future = random.randint(2, 8)
     significant_day = date.today() + timedelta(days=days_in_future)
@@ -103,7 +107,7 @@ def date_prediction_s(mood, dirty):
     return sentence_case(s)
 
 
-def feeling_statement_s(mood, dirty):
+def feeling_statement_s(mood, dirty=False):
     """Generate a sentence that asserts a mood-based feeling."""
     adjectives = wordlist("_feeling_adjs", dirty, prefix=mood)
     degrees = wordlist("neutral_degrees", dirty) + wordlist("_degrees", dirty, prefix=mood)
@@ -119,7 +123,7 @@ def feeling_statement_s(mood, dirty):
     return sentence_case(s, exciting)
 
 
-def positive_intensifier(dirty):
+def positive_intensifier(dirty=False):
     """Extend a statement of positive feelings."""
     r = random.random()
 
@@ -135,7 +139,7 @@ def positive_intensifier(dirty):
         return ", and you don't give a fuck"
 
 
-def consolation(dirty):
+def consolation(dirty=False):
     """Provide a consolation for feeling bad."""
     r = random.random()
 
@@ -148,7 +152,7 @@ def consolation(dirty):
         return "..."
 
 
-def warning_s(mood, dirty):
+def warning_s(mood, dirty=False):
     r = random.random()
     avoid_list = wordlist("avoid_list", dirty)
     bad_thing = random.choice(avoid_list)
@@ -166,7 +170,7 @@ def warning_s(mood, dirty):
     return sentence_case(s)
 
 
-def emotive_event(mood, dirty):
+def emotive_event(mood, dirty=False):
     """Generate a sentence about a prolonged emotion."""
     feeling_adjs = wordlist("_feeling_adjs", dirty, prefix=mood)
     emotive_adjs = wordlist("_emotive_adjs", dirty, prefix=mood)
