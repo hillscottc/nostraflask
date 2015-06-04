@@ -1,4 +1,5 @@
 
+
 A Flask interface for Nostradamuss, hosted on [heroku](https://nostraflask.herokuapp.com/).
 
 # Build
