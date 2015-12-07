@@ -1,29 +1,32 @@
 import sys
-import dirtywords
+import alt_words
 
 this_module = sys.modules[__name__]
 
 
 def _setup():
-    """Create lists in this module with both "clean" & dirty words."""
-    for name in dir(dirtywords):
+    """
+    Create lists in this module with both standard & alt_words.
+    Alt_words are edgier words for lists. Not heavily used.
+    """
+    for name in dir(alt_words):
         if name[:1] == "_":
             continue
 
-        named_object = getattr(dirtywords, name)
+        named_object = getattr(alt_words, name)
         if isinstance(named_object, list):
             clean_list = getattr(this_module, name)
-            dirty_list = clean_list + named_object
-            dirty_name = "dirty_" + name
-            setattr(this_module, dirty_name, dirty_list)
+            alt_list = clean_list + named_object
+            alt_name = "alt_" + name
+            setattr(this_module, alt_name, alt_list)
 
 
-def wordlist(name, dirty=False, prefix=""):
-    """Get a word list by name, with optional filth."""
+def wordlist(name, alt_words=False, prefix=""):
+    """Get a word list by name, with optional alts."""
     name = prefix + name
-    dirty_name = "dirty_" + name
-    if dirty and hasattr(this_module, dirty_name):
-        return getattr(this_module, dirty_name)
+    alt_name = "alt_" + name
+    if alt_words and hasattr(this_module, alt_name):
+        return getattr(this_module, alt_name)
     return getattr(this_module, name)
 
 

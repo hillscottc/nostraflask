@@ -8,7 +8,7 @@ from .wordlist import wordlist
 
 log = logging.getLogger(__name__)
 
-def generate(dirty=False):
+def generate(alt_words=False):
     """Generate a three to four sentence horoscope."""
     # Pick a mood (usually positive)
     mood = "good" if random.random() <= 0.8 else "bad"
@@ -21,20 +21,20 @@ def generate(dirty=False):
     # Select 2 or 3 sentences
     k = random.randint(2, 3)
     sentences = random.sample(sentences, k)
-    final_text = " ".join([sentence(mood, dirty) for sentence in sentences])
+    final_text = " ".join([sentence(mood, alt_words) for sentence in sentences])
 
     # Optionally add a date prediction
     # if random.random() <= 0.5 and k == 2:
     #     final_text += " " + date_prediction_s(mood, dirty)
     # Always add a date prediction
-    final_text += " " + date_prediction_s(mood, dirty)
+    final_text += " " + date_prediction_s(mood, alt_words)
 
     log.info(final_text)
 
     return final_text
 
 
-def relationship(mood, dirty=False):
+def relationship(mood, alt_words=False):
     """Generate a sentence about a relationship."""
     if mood == "good":
         verb = "strengthened"
@@ -44,8 +44,8 @@ def relationship(mood, dirty=False):
         talk = "argument"
 
     # Wordlists
-    familiar_people = wordlist("familiar_people", dirty)
-    conversation_topics = wordlist("conversation_topics", dirty)
+    familiar_people = wordlist("familiar_people", alt_words)
+    conversation_topics = wordlist("conversation_topics", alt_words)
 
     person = choose_from(familiar_people)
     topic = choose_from(conversation_topics)
@@ -55,12 +55,12 @@ def relationship(mood, dirty=False):
     return sentence_case(s)
 
 
-def encounter(mood, dirty=False):
+def encounter(mood, alt_words=False):
     """Generate a few sentences about a meeting with another person."""
     # Sentence 1: The meeting
-    familiar_people = wordlist("familiar_people", dirty)
-    strange_people = wordlist("strange_people", dirty)
-    locations = wordlist("locations", dirty)
+    familiar_people = wordlist("familiar_people", alt_words)
+    strange_people = wordlist("strange_people", alt_words)
+    locations = wordlist("locations", alt_words)
 
     person = choose_from(familiar_people, strange_people)
     location = choose_from(locations)
@@ -69,11 +69,11 @@ def encounter(mood, dirty=False):
     s1 = "You may meet %s %s %s." % (person, preposition, location)
 
     # Sentence 2: The discussion
-    discussions = wordlist("neutral_discussions", dirty)
-    discussions += wordlist("_discussions", dirty, prefix=mood)
-    feeling_nouns = wordlist("_feeling_nouns", dirty, prefix=mood)
-    emotive_nouns = wordlist("_emotive_nouns", dirty, prefix=mood)
-    conversation_topics = wordlist("conversation_topics", dirty)
+    discussions = wordlist("neutral_discussions", alt_words)
+    discussions += wordlist("_discussions", alt_words, prefix=mood)
+    feeling_nouns = wordlist("_feeling_nouns", alt_words, prefix=mood)
+    emotive_nouns = wordlist("_emotive_nouns", alt_words, prefix=mood)
+    conversation_topics = wordlist("conversation_topics", alt_words)
 
     discussion = choose_from(discussions)
     if random.random() <= 0.5:
@@ -88,7 +88,7 @@ def encounter(mood, dirty=False):
     return "%s %s" % (s1, s2)
 
 
-def date_prediction_s(mood, dirty=False):
+def date_prediction_s(mood, alt_words=False):
     """Generate a random prediction sentence containing a date."""
     days_in_future = random.randint(2, 8)
     significant_day = date.today() + timedelta(days=days_in_future)
@@ -107,10 +107,10 @@ def date_prediction_s(mood, dirty=False):
     return sentence_case(s)
 
 
-def feeling_statement_s(mood, dirty=False):
+def feeling_statement_s(mood, alt_words=False):
     """Generate a sentence that asserts a mood-based feeling."""
-    adjectives = wordlist("_feeling_adjs", dirty, prefix=mood)
-    degrees = wordlist("neutral_degrees", dirty) + wordlist("_degrees", dirty, prefix=mood)
+    adjectives = wordlist("_feeling_adjs", alt_words, prefix=mood)
+    degrees = wordlist("neutral_degrees", alt_words) + wordlist("_degrees", alt_words, prefix=mood)
 
     adj = choose_from(adjectives)
     adj = ing_to_ed(adj)
@@ -119,16 +119,16 @@ def feeling_statement_s(mood, dirty=False):
     exciting = (mood == "good" and random.random() <= 0.5)
     are = random.choice([" are", "'re"])
     s = "You%s feeling %s %s" % (are, degree, adj)
-    s += ending(dirty)
+    s += ending(alt_words)
     return sentence_case(s, exciting)
 
 
-def positive_intensifier(dirty=False):
+def positive_intensifier(alt_words=False):
     """Extend a statement of positive feelings."""
     r = random.random()
 
     # Increase the probability of not giving a fuck as appropriate.
-    dirty_factor = 2 if dirty else 1
+    dirty_factor = 2 if alt_words else 1
 
     if r <= (0.5/dirty_factor):
         verb = random.choice(["say", "do"])
@@ -139,7 +139,7 @@ def positive_intensifier(dirty=False):
         return ", and you don't give a fuck"
 
 
-def consolation(dirty=False):
+def consolation(alt_words=False):
     """Provide a consolation for feeling bad."""
     r = random.random()
 
@@ -152,9 +152,9 @@ def consolation(dirty=False):
         return "..."
 
 
-def warning_s(mood, dirty=False):
+def warning_s(mood, alt_words=False):
     r = random.random()
-    avoid_list = wordlist("avoid_list", dirty)
+    avoid_list = wordlist("avoid_list", alt_words)
     bad_thing = random.choice(avoid_list)
 
     if r <= 0.27:
@@ -170,13 +170,13 @@ def warning_s(mood, dirty=False):
     return sentence_case(s)
 
 
-def emotive_event(mood, dirty=False):
+def emotive_event(mood, alt_words=False):
     """Generate a sentence about a prolonged emotion."""
-    feeling_adjs = wordlist("_feeling_adjs", dirty, prefix=mood)
-    emotive_adjs = wordlist("_emotive_adjs", dirty, prefix=mood)
-    feeling_nouns = wordlist("_feeling_nouns", dirty, prefix=mood)
-    emotive_nouns = wordlist("_emotive_nouns", dirty, prefix=mood)
-    time_periods = wordlist("time_periods", dirty)
+    feeling_adjs = wordlist("_feeling_adjs", alt_words, prefix=mood)
+    emotive_adjs = wordlist("_emotive_adjs", alt_words, prefix=mood)
+    feeling_nouns = wordlist("_feeling_nouns", alt_words, prefix=mood)
+    emotive_nouns = wordlist("_emotive_nouns", alt_words, prefix=mood)
+    time_periods = wordlist("time_periods", alt_words)
     time_period = random.choice(time_periods)
 
     if random.random() <= 0.5:
