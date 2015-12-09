@@ -1,5 +1,7 @@
 from unittest import TestCase
 from horoscope import horoscope
+from db import sqla_insert
+
 
 class NostraUnitTest(TestCase):
 
