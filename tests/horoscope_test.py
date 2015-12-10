@@ -1,8 +1,13 @@
 from unittest import TestCase
-from horoscope import horoscope
+from horoscope import horoscope, word_cache
+import redis
+
+redis_client = redis.Redis(
+    host='localhost',
+    port=6379)
 
 
-class NostraUnitTest(TestCase):
+class HoroscopeTest(TestCase):
 
     def setUp(self):
         print
@@ -23,19 +28,4 @@ class NostraUnitTest(TestCase):
             results = horoscope.encounter(mood)
             print results
             self.assertTrue(results)
-
-    def test_word_data(self):
-        word_data = {
-            "familiar people": [
-                "your mother",
-                "your father",
-                "your closest friend",
-                "a family member"
-            ]
-        }
-
-        # Call function to insert data
-        for val in word_data.keys():
-            print val
-
 
