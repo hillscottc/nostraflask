@@ -1,7 +1,10 @@
+# Covers JetBrains IDEs
+*.iml
+.idea/
+
 *.pyc
 
 bower_components/
-
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

@@ -3,7 +3,7 @@ from unittest import TestCase
 import redis
 from horoscope import word_data
 
-from app.horoscope import word_cache
+from webapp.horoscope import word_cache
 
 redis_client = redis.Redis(
     host='localhost',

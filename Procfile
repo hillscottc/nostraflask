@@ -1,1 +1,0 @@
-web: gunicorn nostra:app --log-file=-
