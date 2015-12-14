@@ -1,4 +1,5 @@
 import sys
+
 import alt_words
 
 this_module = sys.modules[__name__]
