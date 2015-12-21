@@ -16,7 +16,7 @@ Then install and run with:
 ## Docker
 
     docker build -t your_name/nostraflask .
-    docker run -d -P your_name/nostraflask python webapp/application.py
+    docker run -d -P your_name/nostraflask
 
 # Test
 I'm using [Nose](http://nose.readthedocs.org/en/latest/). 
