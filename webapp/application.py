@@ -9,12 +9,12 @@ DEBUG = True
 application.config.from_object(__name__)
 
 
+# @application.route('/')
+# def index():
+#     provider = str(os.environ.get('PROVIDER', 'world'))
+#     return 'Hello '+provider+'!'
+
 @application.route('/')
-def index():
-    provider = str(os.environ.get('PROVIDER', 'world'))
-    return 'Hello '+provider+'!'
-
-
 @application.route('/home')
 def home():
     return render_template('home.html')
