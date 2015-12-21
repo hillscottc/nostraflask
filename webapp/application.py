@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, jsonify
-from horoscope import horoscope
+from webapp.horoscope import horoscope
 
 application = Flask(__name__)
 
