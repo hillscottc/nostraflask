@@ -1,21 +1,21 @@
-"""Adapted from the Random Horoscope Generator at https://github.com/michaelsproul/bullshit"""
-import random
 import logging
+import random
 from datetime import date, timedelta
+
+from utils import choose_from, choose_uniq, sentence_case, ing_to_ed, an
 from word_lists.default_library import default_library
-from .common import choose_from, choose_uniq, sentence_case, ing_to_ed, an
 
 log = logging.getLogger(__name__)
 
 
-def get_words(name, lib=default_library):
+def get_words(name):
     """
     Get a named word list from a library module.
     :param name:
     :param lib:
     :return:
     """
-    return lib[name]
+    return default_library[name]
 
 
 def generate():
@@ -164,7 +164,7 @@ def positive_intensifier():
     elif r <= 0.95:
         return ", and you don't care who knows it"
     else:
-        return ", and you don't give a fuck"
+        return ", and you don't give a damn"
 
 
 def consolation():

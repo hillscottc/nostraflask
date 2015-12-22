@@ -1,26 +1,27 @@
 from unittest import TestCase
-from ..horoscope import horoscope
+
+from webapp import nostra
 
 
-class HoroscopeTest(TestCase):
+class NostraTest(TestCase):
 
     def setUp(self):
         print
 
     def test_generate(self):
-        results = horoscope.generate()
+        results = nostra.generate()
         print results
         self.assertTrue(results)
 
     def test_relationship(self):
         for mood in ['good', 'bad']:
-            results = horoscope.relationship(mood)
+            results = nostra.relationship(mood)
             print results
             self.assertTrue(results)
 
     def test_encounter(self):
         for mood in ['good', 'bad']:
-            results = horoscope.encounter(mood)
+            results = nostra.encounter(mood)
             print results
             self.assertTrue(results)
 

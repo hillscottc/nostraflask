@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, jsonify
-from horoscope import horoscope
+import nostra
 
 application = Flask(__name__)
 
@@ -33,12 +33,12 @@ def hello(name=None):
 
 @application.route('/gen', methods=['GET', 'POST'])
 def gen():
-    return horoscope.generate()
+    return nostra.generate()
 
 
 @application.route('/fortune', methods=['GET', 'POST'])
 def fortune():
-    return jsonify({'fortune': horoscope.generate()})
+    return jsonify({'fortune': nostra.generate()})
 
 
 if __name__ == '__main__':
