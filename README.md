@@ -1,13 +1,15 @@
 
+A fortune generator web application, in Python and Flask.
 
-A Flask interface for Nostradamus, hosted on AWS at 
-[nostraflask-dev.elasticbeanstalk.com](http://nostraflask-dev.elasticbeanstalk.com/).
+See it hosted on AWS at [nostraflask-dev.elasticbeanstalk.com](http://nostraflask-dev.elasticbeanstalk.com/).
 
 # Build
-Clone this repo. Then, the app can be installed/run locally with pip, or as a [Docker](https://www.docker.com/) image.
+First, clone this repository. 
+
+Then, the app can be installed/run locally with pip, or as a [Docker](https://www.docker.com/) image.
 
 ## pip local
-Create a python virtual environment with [virtualenv](https://virtualenv.pypa.io/en/latest/) or [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/en/latest/).
+Create a python virtual environment with [virtualenv](https://virtualenv.pypa.io/en/latest/).
 Then install and run with:
 
     pip install -r requirements.txt
