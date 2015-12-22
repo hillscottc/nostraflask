@@ -1,11 +1,5 @@
 from unittest import TestCase
-
-import redis
-from horoscope import horoscope
-
-redis_client = redis.Redis(
-    host='localhost',
-    port=6379)
+from ..horoscope import horoscope
 
 
 class HoroscopeTest(TestCase):

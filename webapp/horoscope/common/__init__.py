@@ -1,5 +1,3 @@
-"""Bullshit Generator, by Michael Sproul."""
-
 import random
 
 vowels = {"a", "e", "i", "o", "u"}
