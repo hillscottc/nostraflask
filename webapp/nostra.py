@@ -3,19 +3,16 @@ import random
 from datetime import date, timedelta
 
 from utils import choose_from, choose_uniq, sentence_case, ing_to_ed, an
-from word_lists.default_library import default_library
+from word_lists.default_library import default_library, Mood
 
 log = logging.getLogger(__name__)
 
 
-def get_words(name):
+def get_words(name, library=default_library):
     """
-    Get a named word list from a library module.
-    :param name:
-    :param lib:
-    :return:
+    Get a named word list from library module.
     """
-    return default_library[name]
+    return library[name]
 
 
 def generate():
@@ -23,11 +20,9 @@ def generate():
     Generate a three to four sentence horoscope.
     """
     # Pick a mood (usually positive)
-    mood = "good" if random.random() <= 0.8 else "bad"
+    mood = Mood.GOOD if random.random() <= 0.8 else Mood.BAD
 
     discussion_s = choose_from([relationship, encounter])
-    # sentences = [feeling_statement_s, cosmic_implication_s, warning_s, discussion_s]
-    # No cosmic stuff.
     sentences = [feeling_statement_s, warning_s, discussion_s]
 
     # Select 2 or 3 sentences
@@ -49,10 +44,8 @@ def generate():
 def relationship(mood):
     """
     Generate a sentence about a relationship.
-    :param mood:
-    :return:
     """
-    if mood == "good":
+    if mood == Mood.GOOD:
         verb = "strengthened"
         talk = "discussion"
     else:
@@ -74,15 +67,13 @@ def relationship(mood):
     return sentence_case(s)
 
 
-def encounter(mood=None):
+def encounter(mood=Mood.NEUTRAL):
     """
     Generate a few sentences about a meeting with another person.
-    :param mood:
-    :return:
     """
 
-    if mood not in ['good', 'bad', None]:
-        raise ValueError("Invalid mood option.")
+    # if mood not in ['good', 'bad', '']:
+    #     raise ValueError("Invalid mood option.")
 
     # Sentence 1: The meeting
     familiar_people = get_words("familiar_people")
@@ -116,7 +107,9 @@ def encounter(mood=None):
 
 
 def date_prediction_s():
-    """Generate a random prediction sentence containing a date."""
+    """
+    Generate a random prediction sentence containing a date.
+    """
     days_in_future = random.randint(2, 8)
     significant_day = date.today() + timedelta(days=days_in_future)
     month = significant_day.strftime("%B")
@@ -137,8 +130,6 @@ def date_prediction_s():
 def feeling_statement_s(mood):
     """
     Generate a sentence that asserts a mood-based feeling.
-    :param mood:
-    :return:
     """
     adjectives = get_words(mood + "_feeling_adjs")
     degrees = get_words("neutral_degrees") + get_words(mood + "_degrees")
@@ -146,8 +137,8 @@ def feeling_statement_s(mood):
     adj = choose_from(adjectives)
     adj = ing_to_ed(adj)
     degree = choose_from(degrees)
-    ending = positive_intensifier if mood == "good" else consolation
-    exciting = (mood == "good" and random.random() <= 0.5)
+    ending = positive_intensifier if mood == Mood.GOOD else consolation
+    exciting = (mood == Mood.GOOD and random.random() <= 0.5)
     are = random.choice([" are", "'re"])
     s = "You%s feeling %s %s" % (are, degree, adj)
     s += ending()
@@ -155,7 +146,9 @@ def feeling_statement_s(mood):
 
 
 def positive_intensifier():
-    """Extend a statement of positive feelings."""
+    """
+    Extend a statement of positive feelings.
+    """
     r = random.random()
 
     if r <= 0.5:
@@ -168,7 +161,9 @@ def positive_intensifier():
 
 
 def consolation():
-    """Provide a consolation for feeling bad."""
+    """
+    Provide a consolation for feeling bad.
+    """
     r = random.random()
 
     if r <= 0.6:
@@ -201,8 +196,6 @@ def warning_s(*args):
 def emotive_event(mood):
     """
     Generate a sentence about a prolonged emotion.
-    :param mood:
-    :return:
     """
     feeling_adjs = get_words(mood + "_feeling_adjs")
     emotive_adjs = get_words(mood + "_emotive_adjs")

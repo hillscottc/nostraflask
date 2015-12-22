@@ -1,57 +1,64 @@
 
+def enum(**named_values):
+    """A basic enum implementation."""
+    return type('Enum', (), named_values)
+
+# Define the Mood type strings. Often used to prepend.
+Mood = enum(BAD='bad', GOOD='good', NEUTRAL='')
+
 default_library = {
 
-    "planets" : ["Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus",
-                 "Neptune", "Pluto"],
+    "planets": ["Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus",
+                "Neptune", "Pluto"],
 
-    "stars" : ["Proxima Centauri", "Barnard's Star", "Sirius A", "Epsilon Eridani"],
+    "stars": ["Proxima Centauri", "Barnard's Star", "Sirius A", "Epsilon Eridani"],
 
-    "aspects" : ["conjunction", "sextile", "square", "trine", "opposition"],
+    "aspects": ["conjunction", "sextile", "square", "trine", "opposition"],
 
-    "wanky_events" : ["a large Electromagnetic disturbance", "Quantum Flux",
+    "wanky_events": ["a large Electromagnetic disturbance", "Quantum Flux",
                       "the upcoming Solar eclipse", "Unusual planetary motion"],
 
 
     # Time words
-    "beginnings" : ["arrival", "beginning", "start"],
-    "endings" : ["end", "death", "passing"],
+    "beginnings": ["arrival", "beginning", "start"],
+    "endings": ["end", "death", "passing"],
 
-    "time_periods" : ["interlude", "period", "week", "day"],
+    "time_periods": ["interlude", "period", "week", "day"],
 
     # Feeling adjectives
-    "good_feeling_adjs" : ["romantic", "emotional", "reflective", "irreverent",
+    "good_feeling_adjs": ["romantic", "emotional", "reflective", "irreverent",
                            "subversive", "spiritual", "creative", "intellectual",
                            "adventurous", "enlightening", "fantastic"],
 
-    "bad_feeling_adjs" : ["bitter", "disappointing", "frustrating"],
+    "bad_feeling_adjs": ["bitter", "disappointing", "frustrating"],
 
 
-    "good_emotive_adjs" : ["cathartic", "healing", "mystical"],
+    "good_emotive_adjs": ["cathartic", "healing", "mystical"],
 
-    "bad_emotive_adjs" : ["anti-climactic"],
+    "bad_emotive_adjs": ["anti-climactic"],
 
     # Intensifiers for use in front of feeling adjectives
-    "good_degrees" : ["ridiculously", "amazingly"],
-    "neutral_degrees" : ["a little bit", "fairly", "pretty", "curiously"],
-    "bad_degrees" : ["worringly", "distressingly"],
+    "good_degrees": ["ridiculously", "amazingly"],
+    "neutral_degrees": ["a little bit", "fairly", "pretty", "curiously"],
+    "bad_degrees": ["worringly", "distressingly"],
 
     # Emotive nouns
-    "good_feeling_nouns" : ["love", "reflection", "romance", "enlightenment",
-                            "joy", "desire", "creativity"],
+    "good_feeling_nouns": ["love", "reflection", "romance", "enlightenment",
+                           "joy", "desire", "creativity"],
 
-    "good_emotive_nouns" : ["healing", "catharsis", "mysticism", "transcendence",
-                            "metamorphisis"],
+    "good_emotive_nouns": ["healing", "catharsis", "mysticism", "transcendence",
+                           "metamorphisis"],
 
-    "bad_feeling_nouns" : ["bitterness", "disappointment", "sadness", "frustration",
+    "bad_feeling_nouns": ["bitterness", "disappointment", "sadness", "frustration",
                            "anger", "failure", "boredom", "tension"],
 
-    "bad_emotive_nouns" : ["bad luck", "misfortune", "deja vu"],
+    "bad_emotive_nouns": ["bad luck", "misfortune", "deja vu"],
 
     # Misc
-    "prediction_verbs" : ["heralds", "marks", "foreshadows", "signifies"],
+    "prediction_verbs": ["heralds", "marks", "foreshadows", "signifies"],
 
     # You would be well advised to avoid...
-    "avoid_list" : [
+    "avoid_list": [
         "shopping",
         "swimming",
         "starchy carbs",
@@ -70,14 +77,14 @@ default_library = {
     ],
 
     # People you may meet
-    "familiar_people" : [
+    "familiar_people": [
         "your mother",
         "your father",
         "your closest friend",
         "a family member"
     ],
 
-    "strange_people" : [
+    "strange_people": [
         "a priest or minister",
         "a doctor",
         "a lawyer",
@@ -111,7 +118,7 @@ default_library = {
     ],
 
     # Locations for various events
-    "locations" : [	("at", "the beach"),
+    "locations": [	("at", "the beach"),
                        ("in", "a shopping centre"),
                        ("in", "the bush"),
                        ("in", "a carpark"),
@@ -135,20 +142,20 @@ default_library = {
                        ],
 
     # Types of discussions
-    "neutral_discussions" : [
+    "neutral_discussions": [
         "discussion",
         "talk",
         "conversation",
         "debate"
     ],
 
-    "good_discussions" : [
+    "good_discussions": [
         "chat",
         "intimate conversation",
         "chin wag"
     ],
 
-    "bad_discussions" : [
+    "bad_discussions": [
         "argument",
         "fight",
         "altercation",
@@ -157,7 +164,7 @@ default_library = {
     ],
 
     # Conversation topics (good or bad)
-    "conversation_topics" : [
+    "conversation_topics": [
         "the past",
         "the future",
         "your career",

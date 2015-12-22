@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from webapp import nostra
+from .. import nostra
 
 
 class NostraTest(TestCase):
@@ -16,12 +16,23 @@ class NostraTest(TestCase):
     def test_relationship(self):
         for mood in ['good', 'bad']:
             results = nostra.relationship(mood)
-            print results
+            # print results
             self.assertTrue(results)
 
     def test_encounter(self):
         for mood in ['good', 'bad']:
             results = nostra.encounter(mood)
-            print results
+            # print results
             self.assertTrue(results)
 
+    def test_feeling_statement_s(self):
+        for mood in ['good', 'bad']:
+            results = nostra.feeling_statement_s(mood)
+            # print results
+            self.assertTrue(results)
+
+    def test_warning_s(self):
+        for mood in ['good', 'bad']:
+            results = nostra.warning_s(mood)
+            # print results
+            self.assertTrue(results)
