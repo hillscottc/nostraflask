@@ -52,10 +52,6 @@ def relationship(mood):
         verb = "strained"
         talk = "argument"
 
-    # Wordlists
-    # familiar_people = wordlist("familiar_people", alt_words)
-    # conversation_topics = wordlist("conversation_topics", alt_words)
-
     familiar_people = get_words("familiar_people")
     conversation_topics = get_words("conversation_topics")
 
@@ -67,14 +63,10 @@ def relationship(mood):
     return sentence_case(s)
 
 
-def encounter(mood=Mood.NEUTRAL):
+def encounter(mood):
     """
     Generate a few sentences about a meeting with another person.
     """
-
-    # if mood not in ['good', 'bad', '']:
-    #     raise ValueError("Invalid mood option.")
-
     # Sentence 1: The meeting
     familiar_people = get_words("familiar_people")
     strange_people = get_words("strange_people")
